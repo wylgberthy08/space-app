@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import { Routes } from "./src/routes";
+import AppLoading from "expo-app-loading";
+import theme from "./src/styles/theme";
+import { ThemeProvider } from "styled-components";
+
+import {
+  useFonts,
+  DMSans_700Bold,
+  DMSans_500Medium,
+} from "@expo-google-fonts/dm-sans";
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    DMSans_700Bold,
+    DMSans_500Medium,
+  });
+  if (!fontsLoaded) {
+    <AppLoading />;
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+      <Routes />
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
